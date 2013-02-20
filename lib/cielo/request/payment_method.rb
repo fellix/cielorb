@@ -1,3 +1,5 @@
+require 'builder'
+
 module Cielo
   class Request::PaymentMethod
     def initialize(builder = Builder::XmlMarkup.new)

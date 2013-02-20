@@ -1,5 +1,7 @@
 require 'uri'
 require 'httpi'
+require 'nokogiri'
+require 'nori'
 
 module Cielo
   class Request

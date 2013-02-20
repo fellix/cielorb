@@ -1,3 +1,6 @@
+require 'securerandom'
+require 'builder'
+
 module Cielo
   class Request::Transaction
     def initialize(spec)

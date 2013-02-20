@@ -1,8 +1,4 @@
 require "cielo/version"
-require 'securerandom'
-require 'builder'
-require 'nokogiri'
-require 'nori'
 
 module Cielo
   autoload :Spec, "cielo/spec"

@@ -1,3 +1,5 @@
+require 'builder'
+
 module Cielo
   class Request::OrderData
     def initialize(builder = Builder::XmlMarkup.new)
