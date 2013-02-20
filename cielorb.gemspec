@@ -18,6 +18,12 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   
   gem.add_dependency "builder", "~> 2.0"
+  gem.add_dependency "httpi", "~> 2.0"
+  gem.add_dependency "nori", "~> 2.0"
+  gem.add_dependency "nokogiri", "~> 1.5.6"
+  
   gem.add_development_dependency "minitest", "~> 4.5.0"
+  gem.add_development_dependency "vcr", "~> 2.4.0"
+  gem.add_development_dependency "webmock", "~> 1.9.0"
   gem.add_development_dependency "turn", "~> 0.9.6"
 end

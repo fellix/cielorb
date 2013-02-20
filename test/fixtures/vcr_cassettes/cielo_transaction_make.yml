@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://qasecommerce.cielo.com.br/servicos/ecommwsec.do
+    body:
+      encoding: US-ASCII
+      string: mensagem=%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3Crequisicao-transacao+id%3D%223e80042f-fffd-42e5-b875-af85fc77a75a%22+versao%3D%221.2.0%22%3E%3Cdados-ec%3E%3Cnumero%3E1006993069%3C%2Fnumero%3E%3Cchave%3E25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3%3C%2Fchave%3E%3C%2Fdados-ec%3E%3Cdados-portador%3E%3Cnumero%3E4012001038443335%3C%2Fnumero%3E%3Cvalidade%3E201508%3C%2Fvalidade%3E%3Cindicador%3E1%3C%2Findicador%3E%3Ccodigo-seguranca%3E973%3C%2Fcodigo-seguranca%3E%3C%2Fdados-portador%3E%3Cdados-pedido%3E%3Cnumero%3E178148599%3C%2Fnumero%3E%3Cvalor%3E1000%3C%2Fvalor%3E%3Cmoeda%3E986%3C%2Fmoeda%3E%3Cdata-hora%3E1969-12-31T21%3A00%3A00%3C%2Fdata-hora%3E%3Cdescricao%3E%5Borigem%3A10.50.54.156%5D%3C%2Fdescricao%3E%3Cidioma%3EPT%3C%2Fidioma%3E%3Csoft-descriptor%3E%3C%2Fsoft-descriptor%3E%3C%2Fdados-pedido%3E%3Cforma-pagamento%3E%3Cbandeira%3Evisa%3C%2Fbandeira%3E%3Cproduto%3EA%3C%2Fproduto%3E%3Cparcelas%3E1%3C%2Fparcelas%3E%3C%2Fforma-pagamento%3E%3Curl-retorno%3Ehttp%3A%2F%2Flocalhost%2Flojaexemplo%2Fretorno.jsp%3C%2Furl-retorno%3E%3Cautorizar%3E1%3C%2Fautorizar%3E%3Ccapturar%3Efalse%3C%2Fcapturar%3E%3Ccampo-livre%3EInformacoes+extras%3C%2Fcampo-livre%3E%3Cbin%3E455187%3C%2Fbin%3E%3C%2Frequisicao-transacao%3E
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 20 Feb 2013 13:55:56 GMT
+      Server:
+      - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
+      Content-Length:
+      - '766'
+      Set-Cookie:
+      - JSESSIONID=LtqRRkVBlXnRwWr1ghCJyGLxrCL3212CJ11Tj4h1LhZJQlBdyRBz!1848548449;
+        path=/
+      X-Powered-By:
+      - Servlet/2.5 JSP/2.1
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<transacao versao=\"1.2.0\"
+        id=\"3e80042f-fffd-42e5-b875-af85fc77a75a\" xmlns=\"http://ecommerce.cbmp.com.br\">\n
+        \ <tid>10069930690C6BA3A001</tid>\n  <pan>5UeSVNFr1L76SHYZclDdTlr3Ax2Z84mstUQoXbV9AE0=</pan>\n
+        \ <dados-pedido>\n    <numero>178148599</numero>\n    <valor>1000</valor>\n
+        \   <moeda>986</moeda>\n    <data-hora>2013-02-20T10:55:45.575-03:00</data-hora>\n
+        \   <descricao>[origem:10.50.54.156]</descricao>\n    <idioma>PT</idioma>\n
+        \ </dados-pedido>\n  <forma-pagamento>\n    <bandeira>visa</bandeira>\n    <produto>A</produto>\n
+        \   <parcelas>1</parcelas>\n  </forma-pagamento>\n  <status>0</status>\n  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=0197cb0d75c07073bd01b5bd9a452cb8</url-autenticacao>\n</transacao>\n"
+    http_version: 
+  recorded_at: Thu, 01 Jan 1970 00:00:00 GMT
+recorded_with: VCR 2.4.0
