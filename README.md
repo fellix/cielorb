@@ -30,14 +30,46 @@ Com a spec definida, é possível acessar os serviços da cielo.
 Uma transação é uma operação para efeturar uma cobrança em um determinado cartão
 
 ```ruby
-Cielo::Transaction.new(spec) do |request|
+transaction = Cielo::Transaction.new(spec) do |request|
   request.payer_data do |data|
     data.number "4242 4242 4242 4242"
   end
 end
+
+response = transaction.make # a chamada a make vai enviar a requisição aos serviços da cielo.
 ```
 
 Para mais informações de como preencher a requisição, [veja esse arquivo de teste](https://github.com/fellix/cielorb/blob/master/test/transaction_request_test.rb#L8-L37).
+
+### Trabalhando com a resposta
+
+A resposta de uma transação pode conter dois elementos.
+
+#### Erro na requisição
+
+Caso o serviço tenha retornado algum erro, seu objeto de resposta vai conter um outro objeto chamado erro:
+
+```ruby
+response.error.to_s
+# => ERROR 002 - Credenciais inválidas
+response.error.code
+# => 002
+response.error.message
+# => Credenciais inválidas
+```
+
+#### Requisição efetuada com sucesso
+
+Quanto a resposta da cielo for uma requisição válida, vamos ter elementos de retorno do xml
+
+``` ruby
+response.error.nil?
+# => true
+response.tid
+# => 10069930690C6BA3A001
+```
+
+outros conteúdos do xml estão disponíveis como métodos: ```pan```, ```status```, ```authentication_url```, ```order_data```, ```payment_method```
 
 ## Contribuindo
 
