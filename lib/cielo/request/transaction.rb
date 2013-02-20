@@ -60,9 +60,9 @@ module Cielo
           data.chave @spec.token
         end
         
-        @payer_data.to_xml(xml)
-        @order_data.to_xml(xml)
-        @payment_method.to_xml(xml)
+        @payer_data.to_xml(xml) if @payer_data
+        @order_data.to_xml(xml) if @order_data
+        @payment_method.to_xml(xml) if @payment_method
         
         xml.tag!("url-retorno", @return_url)
         xml.autorizar @authorize

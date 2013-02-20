@@ -1,5 +1,7 @@
 module Cielo
   class Transaction
+    attr_reader :request
+
     def initialize(spec)
       @spec = spec
       @request = Request::Transaction.new(@spec)
