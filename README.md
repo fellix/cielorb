@@ -1,20 +1,18 @@
 # Cielorb
 
-Gem para comunicação com os serviços da cielo de processamento de pagamento
+Gem para comunicação com os serviços da cielo de processamento de pagamento.
 
-## Installation
+Esse projeto se encontra em desenvolvimento nesse momento.
 
-Add this line to your application's Gemfile:
+## Instalação
 
-    gem 'cielorb'
+Adicione essa linha ao Gemfile da sua aplicação:
 
-And then execute:
+    gem 'cielorb', :git => "git://github.com/fellix/cielorb.git"
+
+Então execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install cielorb
 
 ## Usage
 
@@ -22,10 +20,10 @@ Primeiro você deve definir a especificação de conexão, que pode ser uma inst
 ou um objeto que responda a mesma assinatura
 
 ```ruby
-spec = Cielo::Spec.new(token: "MyToken", number: "MyNumber")
+spec = Cielo::Spec.new(token: "MyToken", number: "MyNumber", endpoint: "URL do serviço a ser enviado os dados")
 ```
 
-Com a spec definida, é possível iterar entre os serviços da cielo.
+Com a spec definida, é possível acessar os serviços da cielo.
 
 ### Criando transações
 
@@ -39,12 +37,12 @@ Cielo::Transaction.new(spec) do |request|
 end
 ```
 
-Para mais informações de como preencher a requisição, consulte o manual da cielo.
+Para mais informações de como preencher a requisição, [veja esse arquivo de teste](https://github.com/fellix/cielorb/blob/master/test/transaction_request_test.rb#L8-L37).
 
-## Contributing
+## Contribuindo
 
 1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+2. Crie um branch com o nome da sua feature (`git checkout -b my-new-feature`)
+3. Faça um commit (`git commit -am 'Add some feature'`)
+4. Envie os dados para seu fork (`git push origin my-new-feature`)
+5. Crie um Pull Request
