@@ -19,7 +19,9 @@ module Cielo
     end
     
     def create!
-      raise Failed unless create
+      unless create
+        raise Failed.new(error.to_s)
+      end
     end
     
     def success?

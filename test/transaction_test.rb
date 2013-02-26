@@ -158,7 +158,8 @@ class TransactionTest < Minitest::Unit::TestCase
       
       SecureRandom.stub :uuid, "3e80042f-fffd-42e5-b875-af85fc77a75a" do
         VCR.use_cassette("cielo_transaction_with_error") do
-          assert_raises(Cielo::Transaction::Failed) { transaction.create! }
+          exp = assert_raises(Cielo::Transaction::Failed) { transaction.create! }
+          assert_equal "ERROR 002 - Credenciais inválidas.", exp.message
         end
       end
     end
