@@ -36,25 +36,35 @@ transaction = Cielo::Transaction.new(spec) do |request|
   end
 end
 
-response = transaction.make # a chamada a make vai enviar a requisição aos serviços da cielo.
+transaction.create
+# => true
+
+transaction.success?
+# => true
+
+transaction.failure?
+# => false
+
+transaction.create # criando segunda vez consecutiva
+# => Cielo::Transaction::AlreadyPerformed: transaction already created
 ```
 
 Para mais informações de como preencher a requisição, [veja esse arquivo de teste](https://github.com/fellix/cielorb/blob/master/test/transaction_request_test.rb#L8-L37).
 
 ### Trabalhando com a resposta
 
-A resposta de uma transação pode conter dois elementos.
+A resposta de uma transação só estará disponível após ser feita chamada a ``` create ``` e pode conter dois elementos.
 
 #### Erro na requisição
 
 Caso o serviço tenha retornado algum erro, seu objeto de resposta vai conter um outro objeto chamado erro:
 
 ```ruby
-response.error.to_s
+transaction.error.to_s
 # => ERROR 002 - Credenciais inválidas
-response.error.code
+transaction.error.code
 # => 002
-response.error.message
+transaction.error.message
 # => Credenciais inválidas
 ```
 
@@ -63,9 +73,9 @@ response.error.message
 Quanto a resposta da cielo for uma requisição válida, vamos ter elementos de retorno do xml
 
 ``` ruby
-response.error.nil?
+transaction.error.nil?
 # => true
-response.tid
+transaction.tid
 # => 10069930690C6BA3A001
 ```
 
