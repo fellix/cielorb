@@ -42,20 +42,21 @@ class TransactionTest < Minitest::Unit::TestCase
       
       SecureRandom.stub :uuid, "3e80042f-fffd-42e5-b875-af85fc77a75a" do
         VCR.use_cassette("cielo_transaction_make") do
-          response = transaction.make
+          assert transaction.create
           
-          assert response.error.nil?
+          assert transaction.success?
+          assert !transaction.failure?
           
-          assert "10069930690C6BA3A001", response.tid
-          assert_equal "https://qasecommerce.cielo.com.br/web/index.cbmp?id=0197cb0d75c07073bd01b5bd9a452cb8", response.authentication_url
-          assert_equal "0", response.status
+          assert "10069930690C6BA3A001", transaction.tid
+          assert_equal "https://qasecommerce.cielo.com.br/web/index.cbmp?id=0197cb0d75c07073bd01b5bd9a452cb8", transaction.authentication_url
+          assert_equal "0", transaction.status
           
-          assert_equal "178148599", response.order_data.number
-          assert_equal "1000", response.order_data.amount
+          assert_equal "178148599", transaction.order_data.number
+          assert_equal "1000", transaction.order_data.amount
           
-          assert_equal "visa", response.payment_method.vendor
-          assert_equal "A", response.payment_method.product
-          assert_equal "1", response.payment_method.installments
+          assert_equal "visa", transaction.payment_method.vendor
+          assert_equal "A", transaction.payment_method.product
+          assert_equal "1", transaction.payment_method.installments
         end
       end
     end
@@ -101,14 +102,63 @@ class TransactionTest < Minitest::Unit::TestCase
       
       SecureRandom.stub :uuid, "3e80042f-fffd-42e5-b875-af85fc77a75a" do
         VCR.use_cassette("cielo_transaction_with_error") do
-          response = transaction.make
+          assert !transaction.create
           
-          assert !response.error.nil?
-          assert_equal "002", response.error.code
+          assert !transaction.success?
+          assert transaction.failure?
+          assert_equal "002", transaction.error.code
           
-          assert response.tid.nil?
-          assert response.order_data.nil?
-          assert response.payment_method.nil?
+          assert transaction.tid.nil?
+          assert transaction.order_data.nil?
+          assert transaction.payment_method.nil?
+        end
+      end
+    end
+  end
+  
+  def test_do_not_allow_to_create_same_transaction_twice
+    spec = Cielo::ShopTestSpec.new
+    
+    transaction = Cielo::Transaction.new(spec)
+    transaction.instance_variable_set("@response", "a")
+    
+    assert_raises(Cielo::Transaction::AlreadyPerformed) { transaction.create }
+  end
+  
+  def test_raises_exception_calling_success_when_the_transaction_has_not_created_yeat
+    spec = Cielo::ShopTestSpec.new
+    
+    transaction = Cielo::Transaction.new(spec)
+    
+    assert_raises(Cielo::Transaction::NotCreated) { transaction.success? }
+  end
+  
+  def test_raises_exception_calling_failure_when_the_transaction_has_not_created_yeat
+    spec = Cielo::ShopTestSpec.new
+    
+    transaction = Cielo::Transaction.new(spec)
+    
+    assert_raises(Cielo::Transaction::NotCreated) { transaction.failure? }
+  end
+  
+  def test_raises_exception_when_triyng_to_access_a_response_setter
+    spec = Cielo::ShopTestSpec.new
+    
+    transaction = Cielo::Transaction.new(spec)
+    transaction.instance_variable_set("@response", Cielo::Response::Transaction.new({}))
+    
+    assert_raises(NoMethodError) { transaction.tid = "123" }
+  end
+  
+  def test_raises_exception_when_the_transaction_has_error
+    Time.stub :now, Time.at(0) do
+      spec = Cielo::ShopTestSpec.new
+      
+      transaction = Cielo::Transaction.new(spec)
+      
+      SecureRandom.stub :uuid, "3e80042f-fffd-42e5-b875-af85fc77a75a" do
+        VCR.use_cassette("cielo_transaction_with_error") do
+          assert_raises(Cielo::Transaction::Failed) { transaction.create! }
         end
       end
     end
