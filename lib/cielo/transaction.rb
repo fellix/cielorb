@@ -22,6 +22,8 @@ module Cielo
       unless create
         raise Failed.new(error.to_s)
       end
+      
+      success?
     end
     
     def success?
