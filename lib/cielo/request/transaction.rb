@@ -67,8 +67,8 @@ module Cielo
         xml.tag!("url-retorno", @return_url)
         xml.autorizar @authorize
         xml.capturar @capture
-        xml.tag!("campo-livre", @observation)
-        xml.bin @bin
+        xml.tag!("campo-livre", @observation) if @observation
+        xml.bin @bin if @bin
       end
     end
   end
