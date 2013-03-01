@@ -23,12 +23,17 @@ module Cielo
       @security_code = value
     end
     
+    def holder(value)
+      @holder = value
+    end
+    
     def to_xml(builder = @builder)
       builder.tag!("dados-portador") do |xml|
         xml.numero @number
         xml.validade @expiration
         xml.indicador @indicator
-        xml.tag!("codigo-seguranca", @security_code)
+        xml.tag!("nome-portador", @holder) if @holder
+        xml.tag!("codigo-seguranca", @security_code) if @security_code
       end
     end
   end

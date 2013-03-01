@@ -45,9 +45,9 @@ module Cielo
         xml.valor @amount
         xml.moeda @currency
         xml.tag!("data-hora", @time.strftime("%Y-%m-%dT%H:%M:%S"))
-        xml.descricao @description
+        xml.descricao @description if @description
         xml.idioma @language
-        xml.tag!("soft-descriptor", @soft_descriptor)
+        xml.tag!("soft-descriptor", @soft_descriptor) if @soft_descriptor
       end
     end
   end
