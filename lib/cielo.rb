@@ -7,4 +7,16 @@ module Cielo
   autoload :Transaction, "cielo/transaction"
   autoload :Request, "cielo/request"
   autoload :Response, "cielo/response"
+  
+  def self.observers
+    @observers ||= []
+  end
+  
+  def self.notify_request(object, request, spec)
+    observers.each { |obs| obs.notify_request(object, request, spec) }
+  end
+  
+  def self.notify_response(object, response, spec)
+    observers.each { |obs| obs.notify_response(object, response, spec) }
+  end
 end

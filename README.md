@@ -81,6 +81,28 @@ transaction.tid
 
 outros conteúdos do xml estão disponíveis como métodos: ```pan```, ```status```, ```authentication_url```, ```order_data```, ```payment_method```
 
+## Instrumentation
+
+Algumas vezes precisamos coletar informações das requisições e respostas que enviamos e recebemos, para tal, pode ser usada a api de instrumentation do cielorb
+
+``` ruby
+class MyInstrumentation
+  def notify_request(object, request, spec)
+    # Aqui é possível recuperar o XML antes de ser enviado (request.to_xml), por exemplo.
+  end
+  
+  def notify_response(object, response, spec)
+    # Para recuperar o xml pode-se usar response.xml
+  end
+end
+```
+
+E por fim basta adicionar ao instrumentations
+
+``` ruby
+Cielo.observers << MyInstrumentation.new
+```
+
 ## Contribuindo
 
 1. Fork it

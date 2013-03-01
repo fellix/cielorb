@@ -53,7 +53,7 @@ class RequestTest < Minitest::Unit::TestCase
       end
       
       resp = Cielo::Request.perform(spec, req)
-      assert_equal response_hash, resp
+      assert_equal response_hash, resp[:parsed]
     end
   end
   

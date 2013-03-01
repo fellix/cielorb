@@ -7,6 +7,12 @@ module Cielo
     
     attr_reader :order_data, :payment_method, :error
     
+    def initialize(xml, attributes)
+      @xml = xml
+      
+      super attributes
+    end
+    
     def order_data=(data)
       @order_data = Response::OrderData.new(data)
     end
@@ -21,5 +27,9 @@ module Cielo
       @error = Response::Error.new(data)
     end
     alias :erro= :error=
+    
+    def xml
+      @xml
+    end
   end
 end

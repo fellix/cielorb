@@ -145,7 +145,7 @@ class TransactionTest < Minitest::Unit::TestCase
     spec = Cielo::ShopTestSpec.new
     
     transaction = Cielo::Transaction.new(spec)
-    transaction.instance_variable_set("@response", Cielo::Response::Transaction.new({}))
+    transaction.instance_variable_set("@response", Cielo::Response::Transaction.new("", {}))
     
     assert_raises(NoMethodError) { transaction.tid = "123" }
   end
@@ -162,6 +162,41 @@ class TransactionTest < Minitest::Unit::TestCase
           assert_equal "ERROR 002 - Credenciais inválidas.", exp.message
         end
       end
+    end
+  end
+  
+  class MyObserver
+    attr_reader :request_count, :response_count
+    def initialize
+      @request_count = 0
+      @response_count = 0
+    end
+      
+    def notify_request(*args)
+      @request_count += 1
+    end
+      
+    def notify_response(*args)
+      @response_count += 1
+    end
+  end
+  
+  def test_notify_observers
+    VCR.use_cassette("cielo_transaction_make") do
+      observer = MyObserver.new
+      
+      Cielo.observers << observer
+      spec = Cielo::ShopTestSpec.new
+      
+      transaction = Cielo::Transaction.new(spec)
+      
+      assert_equal 0, observer.request_count
+      assert_equal 0, observer.response_count
+      
+      transaction.create
+      
+      assert_equal 1, observer.request_count
+      assert_equal 1, observer.response_count
     end
   end
 end

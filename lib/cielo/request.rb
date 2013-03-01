@@ -30,8 +30,12 @@ module Cielo
       request = build_request(source)
       
       response = post(request)
+      xml = response.body
       
-      xml_parser.parse(response.body)
+      {
+        parsed: xml_parser.parse(xml),
+        xml: xml
+      }
     end
     
     private

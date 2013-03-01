@@ -12,8 +12,12 @@ module Cielo
     def create
       raise AlreadyPerformed.new("transaction already created") if @response
       
+      Cielo.notify_request(self, @request, @spec)
       response = Request.perform(@spec, @request)
-      @response = Response::Transaction.new response[:transacao] || response
+      parsed = response.fetch :parsed
+
+      @response = Response::Transaction.new(response.fetch(:xml), parsed[:transacao] || parsed)
+      Cielo.notify_response(self, @response, @spec)
       
       success?
     end
