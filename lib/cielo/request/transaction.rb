@@ -54,6 +54,7 @@ module Cielo
     end
     
     def to_xml
+      clear_builder_buffer
       @builder.tag!("requisicao-transacao", id: SecureRandom.uuid, versao: "1.2.0") do |xml|
         xml.tag!("dados-ec") do |data|
           data.numero @spec.number
@@ -70,6 +71,13 @@ module Cielo
         xml.tag!("campo-livre", @observation) if @observation
         xml.bin @bin if @bin
       end
+    end
+    
+    private
+    
+    def clear_builder_buffer
+      @builder = Builder::XmlMarkup.new :encoding => 'utf-8'
+      @builder.instruct!
     end
   end
 end
