@@ -9,6 +9,7 @@ module Cielo
     autoload :OrderData, "cielo/request/order_data"
     autoload :PaymentMethod, "cielo/request/payment_method"
     autoload :Transaction, "cielo/request/transaction"
+    autoload :Query, "cielo/request/query"
     
     def self.perform(spec, source)
       req = new(spec)
@@ -43,6 +44,8 @@ module Cielo
     def build_request(source)
       request = HTTPI::Request.new(@spec.endpoint)
       request.body = { mensagem: source.to_xml }
+      request.auth.ssl.verify_mode = :none
+      request.auth.ssl.ssl_version = :SSLv3  
       
       request
     end

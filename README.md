@@ -81,6 +81,10 @@ transaction.tid
 
 outros conteúdos do xml estão disponíveis como métodos: ```pan```, ```status```, ```authentication_url```, ```order_data```, ```payment_method```
 
+### Consultando transações
+
+;TODO
+
 ## Instrumentation
 
 Algumas vezes precisamos coletar informações das requisições e respostas que enviamos e recebemos, para tal, pode ser usada a api de instrumentation do cielorb
