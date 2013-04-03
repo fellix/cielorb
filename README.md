@@ -83,7 +83,17 @@ outros conteúdos do xml estão disponíveis como métodos: ```pan```, ```status
 
 ### Consultando transações
 
-;TODO
+Para consultar a situação de uma transação, você vai precisar do TID retornado pela Cielo quando você cria uma transação, veja um exemplo de como fazer uma consulta:
+
+```ruby
+  query = Cielo::Query.new(spec) do |request|
+    request.tid "10069930690C6BA3A001"
+  end
+  
+  transaction = query.perform
+```
+
+o objeto retornado será uma instancia de ``` Cielo::Transaction ```
 
 ## Instrumentation
 
