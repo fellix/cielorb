@@ -90,10 +90,12 @@ Para consultar a situação de uma transação, você vai precisar do TID retorn
     request.tid "10069930690C6BA3A001"
   end
   
-  transaction = query.perform
+  query.perform
+  # => true
+  
+  query.tid
+  # => 10069930690C6BA3A001
 ```
-
-o objeto retornado será uma instancia de ``` Cielo::Transaction ```
 
 ## Instrumentation
 

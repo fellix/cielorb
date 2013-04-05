@@ -1,5 +1,7 @@
 module Cielo
   class Query
+    include WebserviceResource
+    
     attr_reader :request
 
     def initialize(spec)
@@ -17,7 +19,7 @@ module Cielo
       @response = Response::Transaction.new(response.fetch(:xml), parsed[:transacao] || parsed)
       Cielo.notify_response(self, @response, @spec)
       
-      @response
+      success?
     end
   end
 end

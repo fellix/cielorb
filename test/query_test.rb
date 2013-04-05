@@ -14,10 +14,10 @@ class QueryTest < Minitest::Unit::TestCase
     end
     
     VCR.use_cassette("cielo_transaction_query") do
-      transaction = query.perform
+      assert query.perform
       
-      assert "10069930690C69EBA001", transaction.tid
-      assert "178148599", transaction.order_data.number
+      assert "10069930690C69EBA001", query.tid
+      assert "178148599", query.order_data.number
     end
   end
 end

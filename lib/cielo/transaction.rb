@@ -1,5 +1,7 @@
 module Cielo
   class Transaction
+    include WebserviceResource
+    
     attr_reader :request
 
     def initialize(spec)
@@ -28,24 +30,6 @@ module Cielo
       end
       
       success?
-    end
-    
-    def success?
-      raise NotCreated.new("transaction is not created yet") unless @response
-      
-      @response.error.nil?
-    end
-    
-    def failure?
-      !success?
-    end
-    
-    def method_missing(name, *args, &block)
-      if @response && @response.respond_to?(name.to_sym) && !name.to_s.include?("=")
-        @response.__send__ name, *args, &block
-      else
-        super
-      end
     end
     
     class AlreadyPerformed < StandardError; end

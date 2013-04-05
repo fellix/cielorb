@@ -4,6 +4,7 @@ module Cielo
   autoload :Spec, "cielo/spec"
   autoload :ShopTestSpec, "cielo/spec"
   autoload :CieloTestSpec, "cielo/spec"
+  autoload :WebserviceResource, "cielo/webservice_resource"
   autoload :Transaction, "cielo/transaction"
   autoload :Query, "cielo/query"
   autoload :Request, "cielo/request"
