@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://qasecommerce.cielo.com.br/servicos/ecommwsec.do
+    body:
+      encoding: US-ASCII
+      string: mensagem=%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3Crequisicao-cancelamento+id%3D%226064f169-574f-494f-8aef-265aeef7f0a2%22+versao%3D%221.2.0%22%3E%3Ctid%3E10069930690C69EBA001%3C%2Ftid%3E%3Cdados-ec%3E%3Cnumero%3E1006993069%3C%2Fnumero%3E%3Cchave%3E25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3%3C%2Fchave%3E%3C%2Fdados-ec%3E%3C%2Frequisicao-cancelamento%3E
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Apr 2013 13:47:01 GMT
+      Server:
+      - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
+      Content-Length:
+      - '166'
+      Set-Cookie:
+      - JSESSIONID=2vL1RpVLLHGJTV2TFh4J3BPLLjHBtskQ18p2TN2VKBFnMzXh8CmG!698590729;
+        path=/
+      X-Powered-By:
+      - Servlet/2.5 JSP/2.1
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<transacao versao=\"1.2.0\"
+        id=\"34093fe6-12ad-4aaf-9673-e9e7e6cc82f4\" xmlns=\"http://ecommerce.cbmp.com.br\">\n
+        \ <tid>10069930690C69EBA001</tid>\n  <pan>5UeSVNFr1L76SHYZclDdTlr3Ax2Z84mstUQoXbV9AE0=</pan>\n
+        \ <dados-pedido>\n    <numero>178148599</numero>\n    <valor>1000</valor>\n
+        \   <moeda>986</moeda>\n    <data-hora>2013-02-19T18:37:37.160-03:00</data-hora>\n
+        \   <descricao>[origem:10.50.54.156]</descricao>\n    <idioma>PT</idioma>\n
+        \ </dados-pedido>\n  <forma-pagamento>\n    <bandeira>visa</bandeira>\n    <produto>A</produto>\n
+        \   <parcelas>1</parcelas>\n  </forma-pagamento>\n  <status>0</status>\n</transacao>\n"
+    http_version: 
+  recorded_at: Fri, 05 Apr 2013 13:47:01 GMT
+recorded_with: VCR 2.4.0

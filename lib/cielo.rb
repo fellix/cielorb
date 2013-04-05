@@ -7,6 +7,7 @@ module Cielo
   autoload :WebserviceResource, "cielo/webservice_resource"
   autoload :Transaction, "cielo/transaction"
   autoload :Query, "cielo/query"
+  autoload :Revoke, "cielo/revoke"
   autoload :Request, "cielo/request"
   autoload :Response, "cielo/response"
   

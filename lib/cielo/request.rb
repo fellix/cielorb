@@ -10,6 +10,7 @@ module Cielo
     autoload :PaymentMethod, "cielo/request/payment_method"
     autoload :Transaction, "cielo/request/transaction"
     autoload :Query, "cielo/request/query"
+    autoload :Revoke, "cielo/request/revoke"
     
     def self.perform(spec, source)
       req = new(spec)

@@ -97,6 +97,22 @@ Para consultar a situação de uma transação, você vai precisar do TID retorn
   # => 10069930690C6BA3A001
 ```
 
+### Estornando transações
+
+Para estornar uma transação você vai precisar do TID retornado pela Cielo quando você cria uma transação, veja um exemplo:
+
+```ruby
+  revoke = Cielo::Revoke.new(spec) do |request|
+    request.tid "10069930690C6BA3A001"
+  end
+  
+  revoke.perform
+  # => true
+  
+  revoke.tid
+  # => 10069930690C6BA3A001
+```
+
 ## Instrumentation
 
 Algumas vezes precisamos coletar informações das requisições e respostas que enviamos e recebemos, para tal, pode ser usada a api de instrumentation do cielorb
